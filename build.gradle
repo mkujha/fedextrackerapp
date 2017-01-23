@@ -1,0 +1,100 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+
+war {
+	baseName = 'trackerappdemo'
+	version = '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+task genJaxb {
+	final def packageName = "com.demo.domain"
+    ext.sourcesDir = "src/main/java"
+    ext.schemaDir = "src/main/resources"
+	final def packageNameFedEx = "com.demo.fedex.domain"
+    doLast() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+          
+            xjc(destdir: sourcesDir, package: packageName, binding: "src/main/resources/binding.xjb"){
+            schema(dir: schemaDir, includes: "TrackingService.wsdl")
+                arg(value: "-wsdl")
+             //  arg(value: "-b binding.xjb")
+                produces(dir: sourcesDir, includes: "**/*.java")
+            }
+           
+        }        
+    }
+}
+
+task genJaxbFedex {
+	final def packageName = "com.demo.fedex.domain"
+    ext.sourcesDir = "src/main/java"
+    ext.schemaDir = "src/main/resources"
+    doLast() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+          
+            xjc(destdir: sourcesDir, package: packageName, binding: "src/main/resources/binding.xjb") {
+            schema(dir: schemaDir, includes: "TrackService_v12.wsdl")
+                arg(value: "-wsdl")   
+               // arg(value: "-b binding.xjb")             
+                produces(dir: sourcesDir, includes: "**/*.java")
+            }           
+        }        
+    }
+}
+task afterEclipseImport {
+	dependsOn "genJaxb"	
+}
+
+configurations {
+    jaxb
+}
+
+
+// tag::dependencies[]
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    compile("org.springframework.boot:spring-boot-starter-ws")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile 'org.mapstruct:mapstruct-jdk8:1.0.0.Final'
+   	compile group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.0.0.Final'
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+  // compile("wsdl4j:wsdl4j:1.6.2")
+    //jaxb("com.sun.xml.bind:jaxb-xjc:2.2.4-1")
+   compile("com.sun.xml.bind:jaxb-core:2.2.11")
+    compile(files(genJaxb.sourcesDir).builtBy(genJaxb))
+    compile(files(genJaxbFedex.sourcesDir).builtBy(genJaxbFedex))   
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.4.3.RELEASE'
+    compile("com.sun.xml.messaging.saaj:saaj-impl:1.3.25")
+        jaxb("com.sun.xml.bind:jaxb-xjc:2.2.4-1")
+    //espJaxb("org.glassfish.jaxb:jaxb-xjc:2.2.11")
+ //  jaxb("org.jvnet.jaxb2_commons:jaxb2-value-constructor:3.0")
+}
+
+
