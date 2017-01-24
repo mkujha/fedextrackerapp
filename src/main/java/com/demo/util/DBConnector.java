@@ -32,7 +32,7 @@ public class DBConnector {
 	}
 
 	public List<WriteEventLogDomain> getWriteEventLog() throws SQLException {
-		return this.getJdbcTemplate().query("SELECT * FROM SHIPING_EVENT_LOG  where EVENTTYPE != 'DL'",
+		return this.getJdbcTemplate().query("SELECT * FROM SHIPING_EVENT_LOG  where EVENTTYPE is null or EVENTTYPE != 'DL'",
 				new WriteEventLogExtractor());
 	}
 

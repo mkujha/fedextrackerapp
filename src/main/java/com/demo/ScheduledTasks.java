@@ -44,7 +44,6 @@ public class ScheduledTasks {
 	FedexTrackerClient fedexTrackerClient;
 	@Autowired
 	SwatchdaylightClient swatchdaylightClient;
-
 	@Autowired
 	@Resource(name = "demoDao")
 	private DBConnector dbConnector;
