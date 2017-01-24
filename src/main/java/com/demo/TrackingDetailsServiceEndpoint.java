@@ -8,6 +8,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.demo.details.domain.AddTrackingDetails;
+import com.demo.details.domain.AddTrackingResponse;
 import com.demo.details.domain.GetTrackingDetails;
 import com.demo.details.domain.GetTrackingResponse;
 import com.demo.util.DBConnector;
@@ -27,6 +29,19 @@ public class TrackingDetailsServiceEndpoint {
 
 		response = dbConnector.getTrackingDetails(request.getInvoiceNo(), request.getTrackingNumber());
 
+		return response;
+	}
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "addTrackingDetails")
+	@ResponsePayload
+	public AddTrackingResponse addTrackingDetails(@RequestPayload AddTrackingDetails request) {
+		AddTrackingResponse response = new AddTrackingResponse();
+
+		if (request.getInvoiceNo() == null || request.getTrackingNumber() == null) {
+			response.setStatus(false);
+		} else {
+			response = dbConnector.addTrackingDetails(request.getInvoiceNo(), request.getTrackingNumber());
+		}
 		return response;
 	}
 

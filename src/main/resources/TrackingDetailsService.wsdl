@@ -12,7 +12,21 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-
+			<xs:element name="addTrackingDetails">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="invoiceNo" type="xs:string" minOccurs="1" />
+						<xs:element name="trackingNumber" type="xs:string" minOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addTrackingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="status" type="xs:boolean" minOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="getTrackingResponse">
 				<xs:complexType>
 					<xs:sequence>
@@ -51,17 +65,35 @@
 	<message name="GetTrackingDetailsResponse">
 		<part name="GetTrackingDetailsResponse" element="ns:getTrackingResponse" />
 	</message>
-
-	<portType name="TrackPortType">
+	<message name="AddTrackingDetailsRequest">
+		<part name="AddTrackingDetailsRequest" element="ns:addTrackingDetails" />
+	</message>
+	<message name="AddTrackingDetailsResponse">
+		<part name="AddTrackingDetailsResponse" element="ns:addTrackingResponse" />
+	</message>
+	<portType name="TrackDetailsPortType">
 		<operation name="getTrackingDetails" parameterOrder="GetTrackingDetails">
 			<input message="ns:GetTrackingDetails" />
 			<output message="ns:GetTrackingDetailsResponse" />
 		</operation>
+		<operation name="addTrackingDetails" parameterOrder="AddTrackingDetails">
+			<input message="ns:AddTrackingDetailsRequest" />
+			<output message="ns:AddTrackingDetailsResponse" />
+		</operation>
 	</portType>
-	<binding name="TrackingDetailsServiceSoapBinding" type="ns:TrackPortType">
+	<binding name="TrackingDetailsServiceSoapBinding" type="ns:TrackDetailsPortType">
 		<s1:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="getTrackingDetails">
 			<s1:operation soapAction="getTrackingDetails" style="document" />
+			<input>
+				<s1:body use="literal" />
+			</input>
+			<output>
+				<s1:body use="literal" />
+			</output>
+		</operation>
+		<operation name="addTrackingDetails">
+			<s1:operation soapAction="addTrackingDetails" style="document" />
 			<input>
 				<s1:body use="literal" />
 			</input>

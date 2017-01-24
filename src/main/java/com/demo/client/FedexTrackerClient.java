@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import com.demo.domain.WriteEventLogRequest;
 import com.demo.fedex.domain.CarrierCodeType;
 import com.demo.fedex.domain.ClientDetail;
 import com.demo.fedex.domain.CompletedTrackDetail;
@@ -72,49 +71,6 @@ public class FedexTrackerClient extends WebServiceGatewaySupport {
 	}
 
 	public TrackRequest createRequest(WriteEventLogDomain writeEventLog) {
-		TrackRequest request = new TrackRequest();
-		WebAuthenticationDetail authenticationDetail = new WebAuthenticationDetail();
-		WebAuthenticationCredential authenticationCredential = new WebAuthenticationCredential();
-		authenticationCredential.setKey(key);
-		authenticationCredential.setPassword(password);
-		authenticationDetail.setUserCredential(authenticationCredential);
-		request.setWebAuthenticationDetail(authenticationDetail);
-		ClientDetail clientdetail = new ClientDetail();
-		clientdetail.setAccountNumber(accountNumber);
-		clientdetail.setMeterNumber(meternumber);
-		// clientdetail.setIntegratorId("123");
-		// Localization localization = new Localization();
-		// localization.setLanguageCode("EN");
-		// localization.setLocaleCode("US");
-		// clientdetail.setLocalization(localization);
-		request.setClientDetail(clientdetail);
-		TransactionDetail transactionDetail = new TransactionDetail();
-		// transactionDetail.setLocalization(localization);
-		request.setTransactionDetail(transactionDetail);
-		VersionId versionId = new VersionId();
-		versionId.setIntermediate(0);
-		versionId.setMajor(12);
-		versionId.setMinor(0);
-		versionId.setServiceId("trck");
-		request.setVersion(versionId);
-		TrackSelectionDetail trackSelectionDetail = new TrackSelectionDetail();
-		trackSelectionDetail.setCarrierCode(CarrierCodeType.FDXE);
-		TrackPackageIdentifier trackPackageIdentifier = new TrackPackageIdentifier();
-		trackPackageIdentifier.setType(TrackIdentifierType.TRACKING_NUMBER_OR_DOORTAG);
-		trackPackageIdentifier.setValue(writeEventLog.getTrackingNumber());
-		// trackSelectionDetail.setTrackingNumberUniqueIdentifier(writeEventLog.getTrackingNumber());
-		trackSelectionDetail.setPackageIdentifier(trackPackageIdentifier);
-		// trackSelectionDetail.setShipmentAccountNumber("510087020");
-		// trackSelectionDetail.setSecureSpodAccount("510051408");
-		/// PagingDetail pagingDetail = new PagingDetail();
-		// pagingDetail.setNumberOfResultsPerPage(new BigInteger("100"));
-		// pagingDetail.setPagingToken("100");
-		// trackSelectionDetail.setPagingDetail(pagingDetail);
-		request.getSelectionDetails().add(trackSelectionDetail);
-		return request;
-	}
-
-	public TrackRequest createRequest(WriteEventLogRequest writeEventLog) {
 		TrackRequest request = new TrackRequest();
 		WebAuthenticationDetail authenticationDetail = new WebAuthenticationDetail();
 		WebAuthenticationCredential authenticationCredential = new WebAuthenticationCredential();

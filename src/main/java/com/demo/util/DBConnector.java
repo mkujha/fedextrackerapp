@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.demo.client.WriteEventLogDomain;
+import com.demo.details.domain.AddTrackingResponse;
 import com.demo.details.domain.GetTrackingResponse;
 import com.demo.details.domain.Tracking;
 
@@ -106,6 +107,18 @@ public class DBConnector {
 
 		}
 		return getTrackingResponse;
+	}
+
+	public AddTrackingResponse addTrackingDetails(String invoiceNo, String trackingNumber) {
+		AddTrackingResponse addTrackingResponse = new AddTrackingResponse();
+		int rawInserted = this.getJdbcTemplate().update(
+				"INSERT INTO SHIPING_EVENT_LOG (INVOICE_NO,  TRACKING_NUMBER) values (?,?)",
+				new Object[] { invoiceNo, trackingNumber });
+		if (rawInserted > 0)
+			addTrackingResponse.setStatus(true);
+		else
+			addTrackingResponse.setStatus(false);
+		return addTrackingResponse;
 	}
 
 }
