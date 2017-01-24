@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.qualution.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax21="http://types.wsa.modesto.qualution.com/xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:axis2="http://wsa.modesto.qualution.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://wsa.modesto.qualution.com">
+    <wsdl:documentation>CtModestoWsaWsSwatch</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://types.wsa.modesto.qualution.com/xsd" attributeFormDefault="qualified" elementFormDefault="unqualified" targetNamespace="http://www.qualution.com">
+            <xs:import namespace="http://types.wsa.modesto.qualution.com/xsd"/>
+            <xs:complexType name="AbstractException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:anyType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Exception">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="Exception" nillable="true" type="ns:AbstractException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="completeOrderPayment">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_CompleteOrderPaymentRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="completeOrderPaymentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_CompleteOrderPaymentResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createRma">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_CreateRmaRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createRmaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_CreateRmaResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deactivateDevice">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_DeactivateDeviceRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deactivateDeviceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_DeactivateDeviceResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setRmaStatus">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_SetRmaStatusRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setRmaStatusResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_SetRmaStatusResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setSnsAndTracking">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_SetSnsAndTrackingRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setSnsAndTrackingResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_SetSnsAndTrackingResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="writeEventLog">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_WriteEventLogRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="writeEventLogResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_WriteEventLogResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getInterfaceVersionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="assignSnAndActivate">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_AssignSnAndActivateRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="assignSnAndActivateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_AssignSnAndActivateResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelOrder">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:CtModestoWsaWs_CancelOrderRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelOrderResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:CtModestoWsaWs_CancelOrderResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="unqualified" targetNamespace="http://types.wsa.modesto.qualution.com/xsd">
+            <xs:complexType name="CtModestoWsaWs_CompleteOrderPaymentRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_CompleteOrderPaymentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_CreateRmaRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="city" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="lineNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phoneNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="reason" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rmaType" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="settings" nillable="true" type="ax21:CtModestoWsaWs_Oidvalue"/>
+                    <xs:element minOccurs="0" name="sn" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="state" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="status" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="zip" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_Oidvalue">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="SQLTypeName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="value" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_CreateRmaResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="recordNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_DeactivateDeviceRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lineNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sn" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_DeactivateDeviceResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_SetRmaStatusRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deviceCondition" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="equipmentStatus" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="inWarrantyYn" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="recordNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="status" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_SetRmaStatusResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_SetSnsAndTrackingRequest">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="inInvDtl" nillable="true" type="ax21:CtModestoWsaWs_OModWsaInvDtl"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_OModWsaInvDtl">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="SQLTypeName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deviceType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="esn" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="iccid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="imsi" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="itemcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lineNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mslCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="trackingNumber" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_SetSnsAndTrackingResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="outInvDtl" nillable="true" type="ax21:CtModestoWsaWs_OModWsaInvDtl"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_WriteEventLogRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="eventArrivalLocation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventCity" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventCountry" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventState" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventStatusExceptionCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventStatusExceptionDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="eventZip" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="trackingNumber" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_WriteEventLogResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="recordNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_AssignSnAndActivateRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="esn" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="iccid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="imsi" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lineNo" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="msl" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_AssignSnAndActivateResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="mdn" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="msid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_CancelOrderRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="invoiceNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="reason" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CtModestoWsaWs_CancelOrderResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="problemDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultCode" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createRmaRequest">
+        <wsdl:part name="parameters" element="ns:createRma"/>
+    </wsdl:message>
+    <wsdl:message name="createRmaResponse">
+        <wsdl:part name="parameters" element="ns:createRmaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="Exception">
+        <wsdl:part name="parameters" element="ns:Exception"/>
+    </wsdl:message>
+    <wsdl:message name="assignSnAndActivateRequest">
+        <wsdl:part name="parameters" element="ns:assignSnAndActivate"/>
+    </wsdl:message>
+    <wsdl:message name="assignSnAndActivateResponse">
+        <wsdl:part name="parameters" element="ns:assignSnAndActivateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setSnsAndTrackingRequest">
+        <wsdl:part name="parameters" element="ns:setSnsAndTracking"/>
+    </wsdl:message>
+    <wsdl:message name="setSnsAndTrackingResponse">
+        <wsdl:part name="parameters" element="ns:setSnsAndTrackingResponse"/>
+    </wsdl:message>
+    <wsdl:message name="cancelOrderRequest">
+        <wsdl:part name="parameters" element="ns:cancelOrder"/>
+    </wsdl:message>
+    <wsdl:message name="cancelOrderResponse">
+        <wsdl:part name="parameters" element="ns:cancelOrderResponse"/>
+    </wsdl:message>
+    <wsdl:message name="completeOrderPaymentRequest">
+        <wsdl:part name="parameters" element="ns:completeOrderPayment"/>
+    </wsdl:message>
+    <wsdl:message name="completeOrderPaymentResponse">
+        <wsdl:part name="parameters" element="ns:completeOrderPaymentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deactivateDeviceRequest">
+        <wsdl:part name="parameters" element="ns:deactivateDevice"/>
+    </wsdl:message>
+    <wsdl:message name="deactivateDeviceResponse">
+        <wsdl:part name="parameters" element="ns:deactivateDeviceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getInterfaceVersionRequest"/>
+    <wsdl:message name="getInterfaceVersionResponse">
+        <wsdl:part name="parameters" element="ns:getInterfaceVersionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="writeEventLogRequest">
+        <wsdl:part name="parameters" element="ns:writeEventLog"/>
+    </wsdl:message>
+    <wsdl:message name="writeEventLogResponse">
+        <wsdl:part name="parameters" element="ns:writeEventLogResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setRmaStatusRequest">
+        <wsdl:part name="parameters" element="ns:setRmaStatus"/>
+    </wsdl:message>
+    <wsdl:message name="setRmaStatusResponse">
+        <wsdl:part name="parameters" element="ns:setRmaStatusResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="CtModestoWsaWsSwatchPortType">
+        <wsdl:operation name="createRma">
+            <wsdl:input message="axis2:createRmaRequest" wsaw:Action="urn:createRma"/>
+            <wsdl:output message="axis2:createRmaResponse" wsaw:Action="urn:createRmaResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:createRmaException"/>
+        </wsdl:operation>
+        <wsdl:operation name="assignSnAndActivate">
+            <wsdl:input message="axis2:assignSnAndActivateRequest" wsaw:Action="urn:assignSnAndActivate"/>
+            <wsdl:output message="axis2:assignSnAndActivateResponse" wsaw:Action="urn:assignSnAndActivateResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:assignSnAndActivateException"/>
+        </wsdl:operation>
+        <wsdl:operation name="setSnsAndTracking">
+            <wsdl:input message="axis2:setSnsAndTrackingRequest" wsaw:Action="urn:setSnsAndTracking"/>
+            <wsdl:output message="axis2:setSnsAndTrackingResponse" wsaw:Action="urn:setSnsAndTrackingResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:setSnsAndTrackingException"/>
+        </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <wsdl:input message="axis2:cancelOrderRequest" wsaw:Action="urn:cancelOrder"/>
+            <wsdl:output message="axis2:cancelOrderResponse" wsaw:Action="urn:cancelOrderResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:cancelOrderException"/>
+        </wsdl:operation>
+        <wsdl:operation name="completeOrderPayment">
+            <wsdl:input message="axis2:completeOrderPaymentRequest" wsaw:Action="urn:completeOrderPayment"/>
+            <wsdl:output message="axis2:completeOrderPaymentResponse" wsaw:Action="urn:completeOrderPaymentResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:completeOrderPaymentException"/>
+        </wsdl:operation>
+        <wsdl:operation name="deactivateDevice">
+            <wsdl:input message="axis2:deactivateDeviceRequest" wsaw:Action="urn:deactivateDevice"/>
+            <wsdl:output message="axis2:deactivateDeviceResponse" wsaw:Action="urn:deactivateDeviceResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:deactivateDeviceException"/>
+        </wsdl:operation>
+        <wsdl:operation name="getInterfaceVersion">
+            <wsdl:input message="axis2:getInterfaceVersionRequest" wsaw:Action="urn:getInterfaceVersion"/>
+            <wsdl:output message="axis2:getInterfaceVersionResponse" wsaw:Action="urn:getInterfaceVersionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="writeEventLog">
+            <wsdl:input message="axis2:writeEventLogRequest" wsaw:Action="urn:writeEventLog"/>
+            <wsdl:output message="axis2:writeEventLogResponse" wsaw:Action="urn:writeEventLogResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:writeEventLogException"/>
+        </wsdl:operation>
+        <wsdl:operation name="setRmaStatus">
+            <wsdl:input message="axis2:setRmaStatusRequest" wsaw:Action="urn:setRmaStatus"/>
+            <wsdl:output message="axis2:setRmaStatusResponse" wsaw:Action="urn:setRmaStatusResponse"/>
+            <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:setRmaStatusException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CtModestoWsaWsSwatchSoap11Binding" type="axis2:CtModestoWsaWsSwatchPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="createRma">
+            <soap:operation soapAction="urn:createRma" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="assignSnAndActivate">
+            <soap:operation soapAction="urn:assignSnAndActivate" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setSnsAndTracking">
+            <soap:operation soapAction="urn:setSnsAndTracking" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <soap:operation soapAction="urn:cancelOrder" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="completeOrderPayment">
+            <soap:operation soapAction="urn:completeOrderPayment" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deactivateDevice">
+            <soap:operation soapAction="urn:deactivateDevice" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getInterfaceVersion">
+            <soap:operation soapAction="urn:getInterfaceVersion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="writeEventLog">
+            <soap:operation soapAction="urn:writeEventLog" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setRmaStatus">
+            <soap:operation soapAction="urn:setRmaStatus" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="CtModestoWsaWsSwatchSoap12Binding" type="axis2:CtModestoWsaWsSwatchPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="createRma">
+            <soap12:operation soapAction="urn:createRma" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="assignSnAndActivate">
+            <soap12:operation soapAction="urn:assignSnAndActivate" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setSnsAndTracking">
+            <soap12:operation soapAction="urn:setSnsAndTracking" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <soap12:operation soapAction="urn:cancelOrder" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="completeOrderPayment">
+            <soap12:operation soapAction="urn:completeOrderPayment" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deactivateDevice">
+            <soap12:operation soapAction="urn:deactivateDevice" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getInterfaceVersion">
+            <soap12:operation soapAction="urn:getInterfaceVersion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="writeEventLog">
+            <soap12:operation soapAction="urn:writeEventLog" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setRmaStatus">
+            <soap12:operation soapAction="urn:setRmaStatus" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CtModestoWsaWsSwatch">
+        <wsdl:port name="CtModestoWsaWsSwatchHttpSoap11Endpoint" binding="axis2:CtModestoWsaWsSwatchSoap11Binding">
+            <soap:address location="http://swatchdaylight.reach4mobile.com:8080/axis2/services/CtModestoWsaWsSwatch.CtModestoWsaWsSwatchHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="CtModestoWsaWsSwatchHttpSoap12Endpoint" binding="axis2:CtModestoWsaWsSwatchSoap12Binding">
+            <soap12:address location="http://swatchdaylight.reach4mobile.com:8080/axis2/services/CtModestoWsaWsSwatch.CtModestoWsaWsSwatchHttpSoap12Endpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

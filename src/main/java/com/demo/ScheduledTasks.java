@@ -36,6 +36,7 @@ import com.demo.fedex.domain.TrackStatusAncillaryDetail;
 import com.demo.fedex.domain.TrackStatusDetail;
 import com.demo.fedex.domain.Weight;
 import com.demo.swatchdaylight.reach4mobile.CtModestoWsaWsWriteEventLogRequest;
+import com.demo.swatchdaylight.reach4mobile.WriteEventLogResponse;
 import com.demo.util.DBConnector;
 
 @Component
@@ -66,11 +67,11 @@ public class ScheduledTasks {
 			for (WriteEventLogDomain tracking : events) {
 				uniqueTracking.put(tracking.getTrackingNumber(), tracking);
 			}
+			//Calling to Fedex track operation
 			TrackReply reply = fedexTrackerClient.trackFedEx(fedexTrackerClient.createRequest(events));
 			log.info(" DB value" + reply);
 			//
 			if (reply != null) {
-
 				if (printNotifications(reply.getNotifications())) {
 					List<WriteEventLogDomain> statusList = new ArrayList<WriteEventLogDomain>();
 					for (int i = 0; i < reply.getCompletedTrackDetails().size(); i++) {
@@ -100,9 +101,19 @@ public class ScheduledTasks {
 						}
 						log.info("--Completed Tracking Detail--");
 						statusList.add(status);
+						
+						//Updating DB with updated value
+						//TODO need to be added validation if shipping event location change
 						dbConnector.manageEvent(status, uniqueTracking.get(
 								reply.getCompletedTrackDetails().get(i).getTrackDetails().get(0).getTrackingNumber()));
-						swatchdaylightClient.writeEventLog(this.createRequest(status));
+						
+						//TODO need to be added validation if shipping event location change
+						//calling to swatchdaylight service
+						WriteEventLogResponse response = swatchdaylightClient.writeEventLog(this.createRequest(status));
+						if(response != null){
+							log.info("Response Code comming from swatchdaylight " + response.getReturn().getResultCode());
+							
+						}
 
 					}
 				}
