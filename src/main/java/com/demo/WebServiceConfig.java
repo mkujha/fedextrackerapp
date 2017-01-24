@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -19,14 +18,13 @@ import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 
 import com.demo.client.FedexTrackerClient;
+import com.demo.client.SwatchdaylightClient;
 import com.demo.util.DBConnector;
 
 @Configuration
 public class WebServiceConfig {
 	private static final Logger LOG = LoggerFactory.getLogger(WebServiceConfig.class);
 
-
-	
 	@Bean
 	public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -38,30 +36,52 @@ public class WebServiceConfig {
 	@Bean
 	public Jaxb2Marshaller marshallerClientMarshaller() {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setContextPath("com.demo.fedex.domain");
-		//marshaller.setPackagesToScan("");
+		marshaller.setContextPaths("com.demo.fedex.domain", "com.demo.swatchdaylight.reach4mobile");
+		// marshaller.setPackagesToScan("");
 		return marshaller;
 	}
 
 	@Bean
-	public FedexTrackerClient quoteClient(Jaxb2Marshaller marshaller) {
+	public FedexTrackerClient fexExClient(Jaxb2Marshaller jaxb2Marshaller) {
 		FedexTrackerClient client = new FedexTrackerClient();
 		client.setDefaultUri("https://wsbeta.fedex.com:443/web-services/track");
-		client.setMarshaller(marshaller);
-		client.setUnmarshaller(marshaller);
+		client.setMarshaller(jaxb2Marshaller);
+		client.setUnmarshaller(jaxb2Marshaller);
 		return client;
 	}
-	
-	@Bean("TrackerService")
+
+	@Bean
+	public SwatchdaylightClient swatchdaylightClient(Jaxb2Marshaller jaxb2Marshaller) {
+		SwatchdaylightClient client = new SwatchdaylightClient();
+		client.setDefaultUri(
+				"http://swatchdaylight.reach4mobile.com:8080/axis2/services/CtModestoWsaWsSwatch.CtModestoWsaWsSwatchHttpSoap12Endpoint/");
+		client.setMarshaller(jaxb2Marshaller);
+		client.setUnmarshaller(jaxb2Marshaller);
+		return client;
+	}
+
+	@Bean("SwatchdaylightService")
 	public SimpleWsdl11Definition definition1509() {
 		SimpleWsdl11Definition wsdl = new SimpleWsdl11Definition();
-		wsdl.setWsdl(customerServiceWsdl());
+		wsdl.setWsdl(swatchdaylightServiceWsdl());
 		return wsdl;
 	}
 
 	@Bean
-	public Resource customerServiceWsdl() {
-		return new ClassPathResource("TrackingService.wsdl");
+	public Resource swatchdaylightServiceWsdl() {
+		return new ClassPathResource("CtModestoWsaWsSwatch.wsdl");
+	}
+
+	@Bean("TrackingDetailsService")
+	public SimpleWsdl11Definition definitionFexEx() {
+		SimpleWsdl11Definition wsdl = new SimpleWsdl11Definition();
+		wsdl.setWsdl(fedExServiceWsdl());
+		return wsdl;
+	}
+
+	@Bean
+	public Resource fedExServiceWsdl() {
+		return new ClassPathResource("TrackingDetailsService.wsdl");
 	}
 
 	@Bean(name = { "com.demo.DataSource" })

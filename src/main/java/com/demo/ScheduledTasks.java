@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.demo.client.FedexTrackerClient;
+import com.demo.client.SwatchdaylightClient;
 import com.demo.client.WriteEventLogDomain;
 import com.demo.domain.WriteEventLog;
 import com.demo.fedex.domain.Address;
@@ -34,6 +35,7 @@ import com.demo.fedex.domain.TrackRequest;
 import com.demo.fedex.domain.TrackStatusAncillaryDetail;
 import com.demo.fedex.domain.TrackStatusDetail;
 import com.demo.fedex.domain.Weight;
+import com.demo.swatchdaylight.reach4mobile.CtModestoWsaWsWriteEventLogRequest;
 import com.demo.util.DBConnector;
 
 @Component
@@ -41,6 +43,8 @@ public class ScheduledTasks {
 
 	@Autowired
 	FedexTrackerClient fedexTrackerClient;
+	@Autowired
+	SwatchdaylightClient swatchdaylightClient;
 
 	@Autowired
 	@Resource(name = "demoDao")
@@ -98,6 +102,8 @@ public class ScheduledTasks {
 						statusList.add(status);
 						dbConnector.manageEvent(status, uniqueTracking.get(
 								reply.getCompletedTrackDetails().get(i).getTrackDetails().get(0).getTrackingNumber()));
+						swatchdaylightClient.writeEventLog(this.createRequest(status));
+
 					}
 				}
 				// printCompletedTrackDetail(reply.getCompletedTrackDetails(),
@@ -107,10 +113,30 @@ public class ScheduledTasks {
 			/* if (reply.getCompletedTrackDetails() != null) {
 			 * printCompletedTrackDetail(reply.getCompletedTrackDetails(),
 			 * status); } */
-			if (isResponseOk(reply.getHighestSeverity())) {
+			if (reply != null && isResponseOk(reply.getHighestSeverity())) {
 				log.info("--Track Reply--");
 			}
 		}
+	}
+
+	private com.demo.swatchdaylight.reach4mobile.WriteEventLog createRequest(WriteEventLogDomain writeEventLogDomain) {
+		com.demo.swatchdaylight.reach4mobile.WriteEventLog eventLog = new com.demo.swatchdaylight.reach4mobile.WriteEventLog();
+		CtModestoWsaWsWriteEventLogRequest request = new CtModestoWsaWsWriteEventLogRequest();
+		request.setEventArrivalLocation(writeEventLogDomain.getEventArrivalLocation());
+		request.setEventCity(writeEventLogDomain.getEventCity());
+		request.setEventCountry(writeEventLogDomain.getEventCountry());
+		// request.setEventDate(writeEventLogDomain.getEventDate());
+		request.setEventState(writeEventLogDomain.getEventState());
+		request.setEventStatusExceptionCode(writeEventLogDomain.getEventStatusExceptionCode());
+		request.setEventDescription(writeEventLogDomain.getEventDescription());
+		request.setEventType(writeEventLogDomain.getEventType());
+		request.setEventZip(writeEventLogDomain.getEventZip());
+		request.setEventStatusExceptionDesc(writeEventLogDomain.getStatusExceptionDescription());
+		request.setTrackingNumber(writeEventLogDomain.getTrackingNumber());
+		request.setInvoiceNo(Double.valueOf("123"));//TODO hard coding
+
+		eventLog.setRequest(request);
+		return eventLog;
 	}
 
 	private void printCompletedTrackDetail(List<CompletedTrackDetail> ctd, WriteEventLogDomain status) {

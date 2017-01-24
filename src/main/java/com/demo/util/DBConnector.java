@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.demo.client.WriteEventLogDomain;
+import com.demo.details.domain.GetTrackingResponse;
+import com.demo.details.domain.Tracking;
 
 @Component
 public class DBConnector {
@@ -61,6 +63,49 @@ public class DBConnector {
 							status.getEventType(), status.getEventZip(), eventLogDomain.getTrackingNumber() });
 		}
 
+	}
+
+	public GetTrackingResponse getTrackingDetails(String invoiceNo, String trackingNumber) {
+		GetTrackingResponse getTrackingResponse = new GetTrackingResponse();
+		String sql = "SELECT * FROM SHIPING_EVENT_LOG  where EVENTTYPE != 'DL'";
+		List<String> args = new ArrayList<String>();
+		List<WriteEventLogDomain> listOftrackingNo = new ArrayList<WriteEventLogDomain>();
+
+		if (invoiceNo != null && !invoiceNo.equalsIgnoreCase("?")) {
+			sql = sql + " AND INVOICE_NO=?";
+			args.add(invoiceNo);
+		}
+		if (trackingNumber != null && !trackingNumber.equalsIgnoreCase("?")) {
+			sql = sql + " AND TRACKING_NUMBER=?";
+			args.add(trackingNumber);
+		}
+		if (!args.isEmpty()) {
+			listOftrackingNo = this.getJdbcTemplate().query(sql, new WriteEventLogExtractor(), args.toArray());
+		} else {
+			listOftrackingNo = this.getJdbcTemplate().query(sql, new WriteEventLogExtractor(), args.toArray());
+		}
+		if (!listOftrackingNo.isEmpty()) {
+			Tracking trackingdetail = null;
+			for (WriteEventLogDomain eventLogDomain : listOftrackingNo) {
+				trackingdetail = new Tracking();
+
+				trackingdetail.setEventArrivalLocation(eventLogDomain.getEventArrivalLocation());
+				trackingdetail.setEventCity(eventLogDomain.getEventCity());
+				trackingdetail.setEventCountry(eventLogDomain.getEventCountry());
+				// request.setEventDate(writeEventLogDomain.getEventDate());
+				trackingdetail.setEventState(eventLogDomain.getEventState());
+				trackingdetail.setEventStatusExceptionCode(eventLogDomain.getEventStatusExceptionCode());
+				trackingdetail.setEventDescription(eventLogDomain.getEventDescription());
+				trackingdetail.setEventType(eventLogDomain.getEventType());
+				trackingdetail.setEventZip(eventLogDomain.getEventZip());
+				// trackingdetail.setEventStatusExceptionDesc(eventLogDomain.getStatusExceptionDescription());
+				trackingdetail.setTrackingNumber(eventLogDomain.getTrackingNumber());
+				trackingdetail.setInvoiceNo(eventLogDomain.getInvoiceNo());// TODO
+				getTrackingResponse.getTrackings().add(trackingdetail);
+			}
+
+		}
+		return getTrackingResponse;
 	}
 
 }
